@@ -2914,7 +2914,7 @@ struct ExampleDualListBox
                 const float items_height = ImGui::GetTextLineHeightWithSpacing();
                 ImGui::SetNextWindowContentSize(ImVec2(0.0f, items.Size * items_height));
 
-                if (ImGui::BeginChildFrame(ImGui::GetID(side ? "1" : "0"), ImVec2(-FLT_MIN, ImGui::GetFontSize() * 20)))
+                if (ImGui::BeginChild(ImGui::GetID(side ? "1" : "0"), ImVec2(-FLT_MIN, ImGui::GetFontSize() * 20), ImGuiChildFlags_FrameStyle))
                 {
                     ImGuiMultiSelectFlags flags = ImGuiMultiSelectFlags_None;
                     ImGuiMultiSelectIO* ms_io = ImGui::BeginMultiSelect(flags);
@@ -2939,7 +2939,7 @@ struct ExampleDualListBox
                     ms_io = ImGui::EndMultiSelect();
                     ApplySelectionRequests(ms_io, side);
                 }
-                ImGui::EndChildFrame();
+                ImGui::EndChild();
             }
 
             // Buttons columns
