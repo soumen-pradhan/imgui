@@ -4,8 +4,6 @@ project(imgui CXX)
 # Adapted from
 # vcpkg/ports/imgui/CMakeLists.txt
 
-find_package(Vulkan REQUIRED)
-
 add_library(${PROJECT_NAME} "")
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
@@ -35,7 +33,7 @@ target_sources(${PROJECT_NAME}
         BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/backends
         FILES
             backends/imgui_impl_glfw.h
-            backends/imgui_impl_vulkan.h
+            backends/imgui_impl_wgpu.h
 
     PRIVATE
         imgui.cpp
@@ -45,11 +43,11 @@ target_sources(${PROJECT_NAME}
         imgui_widgets.cpp
         misc/cpp/imgui_stdlib.cpp
         backends/imgui_impl_glfw.cpp
-        backends/imgui_impl_vulkan.cpp
+        backends/imgui_impl_wgpu.cpp
 )
 
-target_link_libraries(${PROJECT_NAME}
+target_link_options(${PROJECT_NAME}
     PUBLIC
-        glfw
-        Vulkan::Vulkan
+        -sUSE_GLFW=3
+        -sUSE_WEBGPU=1
 )
